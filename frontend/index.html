@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Phone Number Verification</title>
+</head>
+<body>
+    <h1>Phone Number Verification</h1>
+    <form id="signup-form">
+        <input type="text" id="username" placeholder="Username" required>
+        <input type="text" id="number" placeholder="Phone Number" required>
+        <button type="submit">Sign Up</button>
+    </form>
+    <script>
+        document.getElementById("signup-form").addEventListener("submit", async (e) => {
+            e.preventDefault();
+            const username = document.getElementById("username").value;
+            const number = document.getElementById("number").value;
+            const response = await fetch("/auth/signup", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ username, number })
+            });
+            const data = await response.json();
+            alert(data.msg);
+        });
+    </script>
+</body>
+</html>
